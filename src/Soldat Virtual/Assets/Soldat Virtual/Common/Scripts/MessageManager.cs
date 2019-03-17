@@ -8,6 +8,7 @@ public class MessageManager
     /// <param name="message">Message string to show in the toast.</param>
     public static void ShowAndroidToastMessage(string message)
     {
+        Debug.Log("From Android Message: " + message);
         AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject unityActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 

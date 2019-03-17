@@ -4,21 +4,67 @@ using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SoldierMovement : MonoBehaviour
+namespace SoldatVirtual.Scripts
 {
-    private void Start()
+    #if UNITY_EDITOR
+        using Input = GoogleARCore.InstantPreviewInput;
+    #endif
+    
+    public class SoldierMovement : MonoBehaviour
     {
-        MessageManager.ShowAndroidToastMessage("Soldier Movement Start");
-    }
+        public GameObject Soldier;
 
-    private void Update()
-    {
+        public Animator SoldierAnimator;
         
-    }
+        public static Vector3 Destination;
 
-    // This function is called by the EventTrigger on the scene's ground when it is clicked on.
-    public void OnGroundClick(BaseEventData data)
-    {
-        MessageManager.ShowAndroidToastMessage("Soldier Movement - OnGroundClick");
+        public static bool IsSoldierStopped;
+
+        private readonly int hashSpeedPara = Animator.StringToHash("Speed");
+
+        private void Start()
+        {
+            
+        }
+
+        private void Update()
+        {
+            if (!Soldier.activeInHierarchy) // If soldier is not active, return
+                return;
+
+            float speed = 0;
+
+            if (Vector3.Distance(Soldier.transform.position, Destination) <= 0.01)
+            {
+                if (!IsSoldierStopped)
+                {
+                    MessageManager.ShowAndroidToastMessage("Stopping Soldier ");
+                    
+                    // Set the player's position to the destination.
+                    Soldier.transform.position = Destination;
+
+                    // Set the speed (which is what the animator will use) to zero.
+                    speed = 0f;
+                    IsSoldierStopped = true;
+                }
+            }
+            else
+            {
+                speed = 1f;
+
+                MessageManager.ShowAndroidToastMessage("Moving from main." + 
+                "Speed: " + speed +" > " + 0 + ". " +
+                "Position: " + Soldier.transform.position + ". " + 
+                "Destination: " + Destination);
+
+                // Rotate the soldier to face the destination
+                Soldier.transform.LookAt(Destination, Soldier.transform.up);
+                // Move the soldier
+                Soldier.transform.position = Vector3.MoveTowards(Soldier.transform.position, Destination, 0.01f);
+            }
+
+            // Set the animator's Speed parameter based on the (possibly modified) speed that the nav mesh agent wants to move at.
+            SoldierAnimator.SetFloat(hashSpeedPara, speed, 0.1f, Time.deltaTime);        
+        }
     }
 }
