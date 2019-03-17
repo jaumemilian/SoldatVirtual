@@ -23,6 +23,8 @@ namespace SoldatVirtual.Scripts
         /// </summary>
         public GameObject Soldier;
 
+        public GameObject Environment;
+
         /// <summary>
         /// Returns true if the manipulation can be started for the given gesture.
         /// </summary>
@@ -95,7 +97,6 @@ namespace SoldatVirtual.Scripts
                 
                 // Set the position of the soldier
                 Soldier.transform.position = hit.Pose.position;
-                
                 Soldier.transform.rotation = hit.Pose.rotation;
 
                 // Show the soldier to face the camera
@@ -111,6 +112,22 @@ namespace SoldatVirtual.Scripts
                 Soldier.transform.parent = anchor.transform;
 
                 SoldierMovement.Destination = Soldier.transform.position;
+
+
+                // Do the same with the environment
+
+                Environment.SetActive(true);
+
+                // Rotate the environment to face the camera
+                Environment.transform.LookAt(cameraPosition, Environment.transform.up);
+                
+                // Set the position of the environment
+                Environment.transform.position = hit.Pose.position;
+                Environment.transform.rotation = hit.Pose.rotation;
+
+                // Need to attach our environment to the anchor
+                Environment.transform.parent = anchor.transform;
+
             }
         }
     }

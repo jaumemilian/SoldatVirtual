@@ -13,6 +13,10 @@ namespace SoldatVirtual.Scripts
 
     public class SoldatVirtualController : MonoBehaviour
     {
+
+        public GameObject Soldier;
+        public GameObject Environment;
+
         /// <summary>
         /// True if the app is in the process of quitting due to an ARCore connection error, otherwise false.
         /// </summary>
@@ -20,6 +24,8 @@ namespace SoldatVirtual.Scripts
 
         public void Start()
         {
+            Soldier.SetActive(false);
+            Environment.SetActive(false);
         }
 
         /// <summary>
