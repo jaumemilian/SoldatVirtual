@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Soldat Virtual/Scenes/SampleScene.unity
+    path: Assets/Soldat Virtual/Scenes/Soldat Virtual - Test Scene.unity
     guid: b69720afd29e03b4cadb0bae20b87ab6
   m_configObjects: {}
