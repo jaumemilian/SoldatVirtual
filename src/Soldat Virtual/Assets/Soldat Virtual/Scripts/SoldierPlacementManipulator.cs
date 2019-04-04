@@ -4,9 +4,9 @@ namespace SoldatVirtual.Scripts
     using GoogleARCore.Examples.ObjectManipulation;
     using UnityEngine;
 
-    #if UNITY_EDITOR
-        using Input = GoogleARCore.InstantPreviewInput;
-    #endif
+#if UNITY_EDITOR
+    using Input = GoogleARCore.InstantPreviewInput;
+#endif
 
     /// <summary>
     /// Controls the placement of Plane objects via a tap gesture.
@@ -73,12 +73,11 @@ namespace SoldatVirtual.Scripts
                 }
                 else
                 {
-                    // TODO: JMMPEND: Show first soldier or move soldier
                     _OnTapHandler(hit);
                 }
             }
         }
-            
+
         private void _OnTapHandler(TrackableHit hit)
         {
             if (Soldier.activeInHierarchy)
@@ -94,7 +93,7 @@ namespace SoldatVirtual.Scripts
 
                 // Create a new Anchor
                 Anchor anchor = hit.Trackable.CreateAnchor(hit.Pose);
-                
+
                 // Set the position of the soldier
                 Soldier.transform.position = hit.Pose.position;
                 Soldier.transform.rotation = hit.Pose.rotation;
@@ -120,7 +119,7 @@ namespace SoldatVirtual.Scripts
 
                 // Rotate the environment to face the camera
                 Environment.transform.LookAt(cameraPosition, Environment.transform.up);
-                
+
                 // Set the position of the environment
                 Environment.transform.position = hit.Pose.position;
                 Environment.transform.rotation = hit.Pose.rotation;

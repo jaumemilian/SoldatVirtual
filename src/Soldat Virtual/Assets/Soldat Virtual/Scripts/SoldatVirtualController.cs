@@ -7,9 +7,9 @@ using UnityEngine.AI;
 
 namespace SoldatVirtual.Scripts
 {
-    #if UNITY_EDITOR
-        using Input = GoogleARCore.InstantPreviewInput;
-    #endif
+#if UNITY_EDITOR
+    using Input = GoogleARCore.InstantPreviewInput;
+#endif
 
     public class SoldatVirtualController : MonoBehaviour
     {
@@ -34,6 +34,12 @@ namespace SoldatVirtual.Scripts
         public void Update()
         {
             _UpdateApplicationLifecycle();
+        }
+
+        // Check if RunMode Button has been selected
+        public void OnRunModeButtonClick()
+        {
+            MessageManager.ShowAndroidToastMessage("Click !");
         }
 
         /// <summary>
