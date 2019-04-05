@@ -20,7 +20,8 @@ namespace SoldatVirtual.Scripts
 
         public static bool IsSoldierStopped;
 
-        private readonly int hashSpeedParameter = Animator.StringToHash("Speed");
+        private readonly int speedParameter = Animator.StringToHash("Speed");
+        private readonly int isRunModeParameter = Animator.StringToHash("IsRunMode");
 
         private void Start()
         {
@@ -32,7 +33,7 @@ namespace SoldatVirtual.Scripts
             if (!Soldier.activeInHierarchy) // If soldier is not active, return
                 return;
 
-            float speed = 0;
+            float speedValue = 0f;
 
             if (Vector3.Distance(Soldier.transform.position, Destination) <= 0.01)
             {
@@ -44,16 +45,16 @@ namespace SoldatVirtual.Scripts
                     Soldier.transform.position = Destination;
 
                     // Set the speed (which is what the animator will use) to zero.
-                    speed = 0f;
+                    speedValue = 0f;
                     IsSoldierStopped = true;
                 }
             }
             else
             {
-                speed = 1f;
+                speedValue = 1f;
 
                 MessageManager.ShowAndroidToastMessage("Moving from main." +
-                "Speed: " + speed + " > " + 0 + ". " +
+                "Speed: " + speedValue + " > " + 0 + ". " +
                 "Position: " + Soldier.transform.position + ". " +
                 "Destination: " + Destination);
 
@@ -64,7 +65,25 @@ namespace SoldatVirtual.Scripts
             }
 
             // Set the animator's Speed parameter based on the (possibly modified) speed that the nav mesh agent wants to move at.
-            SoldierAnimator.SetFloat(hashSpeedParameter, speed, 0.05f, Time.deltaTime);
+            //SoldierAnimator.SetFloat(speedParameter, speedValue, 0.05f, Time.deltaTime);
+            SoldierAnimator.SetFloat(speedParameter, speedValue);
+        }
+
+        // Check if RunMode Button has been selected
+        public void OnRunModeButtonClick()
+        {
+            if (!IsSoldierStopped)
+                return;
+
+            SoldierAnimator.SetBool(isRunModeParameter, true);
+        }
+
+        public void OnShotModeButtonClick()
+        {
+            if (!IsSoldierStopped)
+                return;
+
+            SoldierAnimator.SetBool(isRunModeParameter, false);
         }
     }
 }

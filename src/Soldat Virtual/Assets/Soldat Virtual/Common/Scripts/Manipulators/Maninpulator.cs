@@ -20,13 +20,13 @@
 
 namespace GoogleARCore.Examples.ObjectManipulation
 {
+#if UNITY_EDITOR
+    using Input = GoogleARCore.InstantPreviewInput;
+#endif
+
     using SoldatVirtual.Scripts;
     using UnityEngine;
 
-    #if UNITY_EDITOR
-        using Input = GoogleARCore.InstantPreviewInput;
-    #endif
-    
     /// <summary>
     /// Base class that manipulates an object via a gesture.
     /// </summary>
@@ -188,7 +188,7 @@ namespace GoogleARCore.Examples.ObjectManipulation
                 tapGestureRecognizer.onGestureStarted -= OnGestureStarted;
             }
         }
-        
+
         private void OnGestureStarted(TapGesture gesture)
         {
             Debug.Log("Manipulator - OnGestureStarted 1");
@@ -232,7 +232,7 @@ namespace GoogleARCore.Examples.ObjectManipulation
 
             OnContinueManipulation(gesture);
         }
-        
+
         private void OnFinished(TapGesture gesture)
         {
             m_IsManipulating = false;

@@ -13,7 +13,9 @@ namespace SoldatVirtual.Scripts
 
     public class SoldatVirtualController : MonoBehaviour
     {
-
+        /// <summary>
+        /// A controller for managing UI associated with the example.
+        /// </summary>
         public GameObject Soldier;
         public GameObject Environment;
 
@@ -34,12 +36,6 @@ namespace SoldatVirtual.Scripts
         public void Update()
         {
             _UpdateApplicationLifecycle();
-        }
-
-        // Check if RunMode Button has been selected
-        public void OnRunModeButtonClick()
-        {
-            MessageManager.ShowAndroidToastMessage("Click !");
         }
 
         /// <summary>

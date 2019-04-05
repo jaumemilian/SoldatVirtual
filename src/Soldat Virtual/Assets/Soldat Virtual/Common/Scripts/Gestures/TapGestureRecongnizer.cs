@@ -20,6 +20,10 @@
 
 namespace GoogleARCore.Examples.ObjectManipulation
 {
+#if UNITY_EDITOR
+    using Input = GoogleARCore.InstantPreviewInput;
+#endif
+
     using GoogleARCore.Examples.ObjectManipulationInternal;
     using UnityEngine;
 

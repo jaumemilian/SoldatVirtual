@@ -20,9 +20,9 @@
 
 namespace SoldatVirtual.Scripts
 {
-    #if UNITY_EDITOR
-        using Input = GoogleARCore.InstantPreviewInput;
-    #endif
+#if UNITY_EDITOR
+    using Input = GoogleARCore.InstantPreviewInput;
+#endif
 
     using UnityEngine;
     using GoogleARCore.Examples.ObjectManipulation;
@@ -79,7 +79,7 @@ namespace SoldatVirtual.Scripts
         /// <summary>
         /// Gets the current selected object.
         /// </summary>
-        public GameObject SelectedObject { get; private set;  }
+        public GameObject SelectedObject { get; private set; }
 
         /// <summary>
         /// The Unity Awake() method.
