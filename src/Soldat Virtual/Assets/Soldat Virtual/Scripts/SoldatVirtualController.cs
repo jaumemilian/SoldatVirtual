@@ -13,14 +13,9 @@ namespace SoldatVirtual.Scripts
 
     public class SoldatVirtualController : MonoBehaviour
     {
-        /// <summary>
-        /// A controller for managing UI associated with the example.
-        /// </summary>
         public GameObject Soldier;
         public GameObject Environment;
-
         public SoldatVirtualUIController UIController;
-
         public SoldierMovement SoldierMovement;
 
         /// <summary>
@@ -58,6 +53,11 @@ namespace SoldatVirtual.Scripts
 
             UIController.ShotModeEnabled();
             SoldierMovement.SetShotMode();
+        }
+
+        public void OnRestartButtonClick()
+        {
+            Start();
         }
 
         /// <summary>
