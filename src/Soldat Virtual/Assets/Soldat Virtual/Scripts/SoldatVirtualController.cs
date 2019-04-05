@@ -19,6 +19,10 @@ namespace SoldatVirtual.Scripts
         public GameObject Soldier;
         public GameObject Environment;
 
+        public SoldatVirtualUIController UIController;
+
+        public SoldierMovement SoldierMovement;
+
         /// <summary>
         /// True if the app is in the process of quitting due to an ARCore connection error, otherwise false.
         /// </summary>
@@ -36,6 +40,24 @@ namespace SoldatVirtual.Scripts
         public void Update()
         {
             _UpdateApplicationLifecycle();
+        }
+
+        public void OnRunModeButtonClick()
+        {
+            if (!SoldierMovement.IsSoldierStopped)
+                return;
+
+            UIController.RunModeEnabled();
+            SoldierMovement.SetRunMode();
+        }
+
+        public void OnShotModeButtonClick()
+        {
+            if (!SoldierMovement.IsSoldierStopped)
+                return;
+
+            UIController.ShotModeEnabled();
+            SoldierMovement.SetShotMode();
         }
 
         /// <summary>

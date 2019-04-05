@@ -25,6 +25,10 @@ namespace SoldatVirtual.Scripts
 
         public GameObject Environment;
 
+        public SoldatVirtualUIController UIController;
+
+        public SoldierMovement SoldierMovement;
+
         /// <summary>
         /// Returns true if the manipulation can be started for the given gesture.
         /// </summary>
@@ -82,51 +86,70 @@ namespace SoldatVirtual.Scripts
         {
             if (Soldier.activeInHierarchy)
             {
-                // Set the destination of the Soldier
-                SoldierMovement.Destination = hit.Pose.position;
-                SoldierMovement.IsSoldierStopped = false;
+                if (SoldatVirtualUIController.IsInShotMode)
+                {
+                    SoldierMovement.Shot(hit.Pose.position);
+                }
+                else
+                {
+                    // Set the destination of the Soldier
+                    SoldierMovement.Destination = hit.Pose.position;
+                    SoldierMovement.IsSoldierStopped = false;
+                }
+
             }
             else
             {
-                // Enable the soldier
-                Soldier.SetActive(true);
-
                 // Create a new Anchor
                 Anchor anchor = hit.Trackable.CreateAnchor(hit.Pose);
-
-                // Set the position of the soldier
-                Soldier.transform.position = hit.Pose.position;
-                Soldier.transform.rotation = hit.Pose.rotation;
-
-                // Show the soldier to face the camera
+                // Get the camera position
                 Vector3 cameraPosition = FirstPersonCamera.transform.position;
-
                 // The soldier should only rotate around the Y axis
                 cameraPosition.y = hit.Pose.position.y;
 
-                // Rotate the soldier to face the camera
-                Soldier.transform.LookAt(cameraPosition, Soldier.transform.up);
+                PrintTheSoldier(hit, cameraPosition, anchor);
 
-                // Need to attach our Soldier to the anchor
-                Soldier.transform.parent = anchor.transform;
+                PrintTheEnviornment(hit, cameraPosition, anchor);
 
-                SoldierMovement.Destination = Soldier.transform.position;
-
-
-                // Do the same with the environment
-                Environment.SetActive(true);
-
-                // Rotate the environment to face the camera
-                Environment.transform.LookAt(cameraPosition, Environment.transform.up);
-
-                // Set the position of the environment
-                Environment.transform.position = hit.Pose.position;
-                Environment.transform.rotation = hit.Pose.rotation;
-
-                // Need to attach our environment to the anchor
-                Environment.transform.parent = anchor.transform;
+                // Initialize the Canvas
+                UIController.RunModeEnabled();
 
             }
+        }
+
+        private void PrintTheSoldier(TrackableHit hit, Vector3 cameraPosition, Anchor anchor)
+        {
+            // Enable the soldier
+            Soldier.SetActive(true);
+
+            // Set the position of the soldier
+            Soldier.transform.position = hit.Pose.position;
+            Soldier.transform.rotation = hit.Pose.rotation;
+
+            // Rotate the soldier to face the camera
+            Soldier.transform.LookAt(cameraPosition, Soldier.transform.up);
+
+            // Need to attach our Soldier to the anchor
+            Soldier.transform.parent = anchor.transform;
+
+            // Initialize the Soldier destination
+            SoldierMovement.Destination = Soldier.transform.position;
+        }
+
+        private void PrintTheEnviornment(TrackableHit hit, Vector3 cameraPosition, Anchor anchor)
+        {
+            // Do the same with the environment
+            Environment.SetActive(true);
+
+            // Set the position of the environment
+            Environment.transform.position = hit.Pose.position;
+            Environment.transform.rotation = hit.Pose.rotation;
+
+            // Rotate the environment to face the camera
+            Environment.transform.LookAt(cameraPosition, Environment.transform.up);
+
+            // Need to attach our environment to the anchor
+            Environment.transform.parent = anchor.transform;
         }
     }
 }

@@ -425,7 +425,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1111240783}
+      - m_Target: {fileID: 1002935961}
         m_MethodName: OnRunModeButtonClick
         m_Mode: 1
         m_Arguments:
@@ -540,6 +540,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Soldier: {fileID: 1111240782}
   Environment: {fileID: 1067609170}
+  UIController: {fileID: 42308589}
+  SoldierMovement: {fileID: 1111240783}
 --- !u!1001 &1065416448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1021,6 +1023,8 @@ MonoBehaviour:
   FirstPersonCamera: {fileID: 196776185}
   Soldier: {fileID: 1111240782}
   Environment: {fileID: 1067609170}
+  UIController: {fileID: 42308589}
+  SoldierMovement: {fileID: 0}
 --- !u!4 &1548914014
 Transform:
   m_ObjectHideFlags: 0
@@ -1094,7 +1098,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1111240783}
+      - m_Target: {fileID: 1002935961}
         m_MethodName: OnShotModeButtonClick
         m_Mode: 1
         m_Arguments:

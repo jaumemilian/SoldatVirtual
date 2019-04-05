@@ -21,7 +21,8 @@ namespace SoldatVirtual.Scripts
         public static bool IsSoldierStopped;
 
         private readonly int speedParameter = Animator.StringToHash("Speed");
-        private readonly int isRunModeParameter = Animator.StringToHash("IsRunMode");
+
+        private readonly int isInShotModeParameter = Animator.StringToHash("IsInShotMode");
 
         private void Start()
         {
@@ -39,8 +40,6 @@ namespace SoldatVirtual.Scripts
             {
                 if (!IsSoldierStopped)
                 {
-                    MessageManager.ShowAndroidToastMessage("Stopping Soldier ");
-
                     // Set the player's position to the destination.
                     Soldier.transform.position = Destination;
 
@@ -53,37 +52,30 @@ namespace SoldatVirtual.Scripts
             {
                 speedValue = 1f;
 
-                MessageManager.ShowAndroidToastMessage("Moving from main." +
-                "Speed: " + speedValue + " > " + 0 + ". " +
-                "Position: " + Soldier.transform.position + ". " +
-                "Destination: " + Destination);
-
                 // Rotate the soldier to face the destination
                 Soldier.transform.LookAt(Destination, Soldier.transform.up);
                 // Move the soldier
                 Soldier.transform.position = Vector3.MoveTowards(Soldier.transform.position, Destination, 0.01f);
             }
 
-            // Set the animator's Speed parameter based on the (possibly modified) speed that the nav mesh agent wants to move at.
-            //SoldierAnimator.SetFloat(speedParameter, speedValue, 0.05f, Time.deltaTime);
             SoldierAnimator.SetFloat(speedParameter, speedValue);
         }
 
-        // Check if RunMode Button has been selected
-        public void OnRunModeButtonClick()
+        public void SetShotMode()
         {
-            if (!IsSoldierStopped)
-                return;
-
-            SoldierAnimator.SetBool(isRunModeParameter, true);
+            SoldierAnimator.SetBool(isInShotModeParameter, true);
         }
 
-        public void OnShotModeButtonClick()
+        public void SetRunMode()
         {
-            if (!IsSoldierStopped)
-                return;
+            SoldierAnimator.SetBool(isInShotModeParameter, false);
+        }
 
-            SoldierAnimator.SetBool(isRunModeParameter, false);
+        public void Shot(Vector3 shotDestination)
+        {
+            // Rotate the soldier where it has been hit
+            Soldier.transform.LookAt(shotDestination, Soldier.transform.up);
+            SoldierAnimator.SetTrigger("Shot");
         }
     }
 }
