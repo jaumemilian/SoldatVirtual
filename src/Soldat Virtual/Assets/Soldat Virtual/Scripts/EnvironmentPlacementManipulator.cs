@@ -11,7 +11,7 @@ namespace SoldatVirtual.Scripts
     /// <summary>
     /// Controls the placement of Plane objects via a tap gesture.
     /// </summary>
-    public class EnvironmentPlaceManipulator : Manipulator
+    public class EnvironmentPlacementManipulator : Manipulator
     {
         /// <summary>
         /// The first-person camera being used to render the passthrough camera image (i.e. AR background).
