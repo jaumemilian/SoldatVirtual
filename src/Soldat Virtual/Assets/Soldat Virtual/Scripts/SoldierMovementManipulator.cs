@@ -63,7 +63,7 @@ namespace SoldatVirtual.Scripts
 
             // Raycast against the location the player touched to search for planes.
             TrackableHit hit;
-            TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon;
+            TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinInfinity;
 
             if (Frame.Raycast(gesture.StartPosition.x, gesture.StartPosition.y, raycastFilter, out hit))
             {
@@ -83,6 +83,8 @@ namespace SoldatVirtual.Scripts
 
         private void _OnTapHandler(TrackableHit hit)
         {
+            Vector3 finalDestination = new Vector3(hit.Pose.position.x, hit.Pose.position.y, hit.Pose.position.z);
+
             if (SoldatVirtualUIController.IsInShotMode)
             {
                 SoldierMovement.Shot(hit.Pose.position);

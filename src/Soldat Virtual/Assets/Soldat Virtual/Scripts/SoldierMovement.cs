@@ -36,7 +36,7 @@ namespace SoldatVirtual.Scripts
 
             float speedValue = 0f;
 
-            if (Vector3.Distance(Soldier.transform.position, Destination) <= 0.01)
+            if (Vector3.Distance(Soldier.transform.position, Destination) <= 0.03)
             {
                 if (!IsSoldierStopped)
                 {

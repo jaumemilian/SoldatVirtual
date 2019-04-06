@@ -4,6 +4,7 @@ using UnityEngine;
 
 using GoogleARCore;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace SoldatVirtual.Scripts
 {
@@ -14,8 +15,15 @@ namespace SoldatVirtual.Scripts
     public class SoldatVirtualController : MonoBehaviour
     {
         public GameObject Environment;
+
+        public GameObject Soldier;
+
         public SoldatVirtualUIController UIController;
+
         public SoldierMovement SoldierMovement;
+
+        public Text EnvironmentText;
+        public Text SoldierText;
 
         public float ModelScalingFactor = 0.005f;
 
@@ -42,6 +50,13 @@ namespace SoldatVirtual.Scripts
         /// </summary>
         public void Update()
         {
+            EnvironmentText.text = "Environment Position: " + Environment.transform.position.ToString();
+            EnvironmentText.text += ". Rotation: " + Environment.transform.rotation.ToString();
+
+            SoldierText.text = "Soldat Position: " + Soldier.transform.position.ToString();
+            SoldierText.text += ". Rotation: " + Soldier.transform.rotation.ToString();
+            SoldierText.text += ". Destination: " + SoldierMovement.Destination;
+
             _UpdateApplicationLifecycle();
         }
 

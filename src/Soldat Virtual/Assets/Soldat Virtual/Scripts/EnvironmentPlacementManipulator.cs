@@ -20,6 +20,7 @@ namespace SoldatVirtual.Scripts
 
         public GameObject Environment;
 
+        public GameObject Soldier;
 
         /// <summary>
         /// Returns true if the manipulation can be started for the given gesture.
@@ -79,8 +80,8 @@ namespace SoldatVirtual.Scripts
         {
             PrintTheEnvironment(hit);
 
-            // Initialize the Soldier destination
-            SoldierMovement.Destination = hit.Pose.position;
+            // Initialize the Soldier destination to the current Soldier position
+            SoldierMovement.Destination = Soldier.transform.position;
         }
 
         private void PrintTheEnvironment(TrackableHit hit)
