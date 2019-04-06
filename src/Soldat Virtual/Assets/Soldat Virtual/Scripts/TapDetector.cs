@@ -145,10 +145,7 @@ namespace SoldatVirtual.Scripts
             Environment.transform.LookAt(cameraPosition, Environment.transform.up);
 
             // Need to attach our gameobject to the anchor
-            // Environment.transform.parent = anchor.transform;
-
+            Environment.transform.parent = anchor.transform;
         }
-
-
     }
 }
