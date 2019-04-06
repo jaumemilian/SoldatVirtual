@@ -954,6 +954,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1067609171}
+  - component: {fileID: 1067609173}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Rescale
@@ -978,6 +979,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1067609173
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067609170}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 1, z: 32}
+  m_Center: {x: 8, y: 0, z: 8}
 --- !u!4 &1111169668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9215589443459090270, guid: f924de287d416824b9c60f198076928c,
@@ -1207,6 +1221,53 @@ Transform:
   m_Father: {fileID: 1067609171}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1287121814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1287121816}
+  - component: {fileID: 1287121815}
+  m_Layer: 0
+  m_Name: SoldierMovementManipulator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1287121815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287121814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76a963ae33513e4fb384107081f7d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstPersonCamera: {fileID: 196776185}
+  Soldier: {fileID: 1111240782}
+  Environment: {fileID: 1067609170}
+  SoldierMovement: {fileID: 1111240783}
+--- !u!4 &1287121816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287121814}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.12517656, y: 3.5645733, z: -3.9653912}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1416246636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,7 +1433,7 @@ GameObject:
   - component: {fileID: 1548914014}
   - component: {fileID: 1548914013}
   m_Layer: 0
-  m_Name: TapDetector
+  m_Name: EnvironmentPlacementManipulator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1391,9 +1452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirstPersonCamera: {fileID: 196776185}
-  Soldier: {fileID: 1111240782}
   Environment: {fileID: 1067609170}
-  SoldierMovement: {fileID: 1111240783}
 --- !u!4 &1548914014
 Transform:
   m_ObjectHideFlags: 0
