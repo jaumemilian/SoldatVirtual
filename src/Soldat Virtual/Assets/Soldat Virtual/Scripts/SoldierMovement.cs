@@ -36,7 +36,7 @@ namespace SoldatVirtual.Scripts
 
             float speedValue = 0f;
 
-            if (Vector3.Distance(Soldier.transform.position, Destination) <= 0.03)
+            if (Vector3.Distance(Soldier.transform.position, Destination) <= 0.01)
             {
                 if (!IsSoldierStopped)
                 {
@@ -55,7 +55,7 @@ namespace SoldatVirtual.Scripts
                 // Rotate the soldier to face the destination
                 Soldier.transform.LookAt(Destination, Soldier.transform.up);
                 // Move the soldier
-                Soldier.transform.position = Vector3.MoveTowards(Soldier.transform.position, Destination, 0.01f);
+                Soldier.transform.position = Vector3.MoveTowards(Soldier.transform.position, Destination, 0.005f);
             }
 
             SoldierAnimator.SetFloat(speedParameter, speedValue);
