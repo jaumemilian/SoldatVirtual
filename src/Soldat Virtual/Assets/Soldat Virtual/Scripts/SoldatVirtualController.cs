@@ -13,7 +13,6 @@ namespace SoldatVirtual.Scripts
 
     public class SoldatVirtualController : MonoBehaviour
     {
-        public GameObject Soldier;
         public GameObject Environment;
         public SoldatVirtualUIController UIController;
         public SoldierMovement SoldierMovement;
