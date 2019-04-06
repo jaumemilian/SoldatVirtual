@@ -18,6 +18,8 @@ namespace SoldatVirtual.Scripts
         public SoldatVirtualUIController UIController;
         public SoldierMovement SoldierMovement;
 
+        public float ModelScalingFactor = 0.005f;
+
         /// <summary>
         /// True if the app is in the process of quitting due to an ARCore connection error, otherwise false.
         /// </summary>
@@ -25,8 +27,15 @@ namespace SoldatVirtual.Scripts
 
         public void Start()
         {
-            Soldier.SetActive(false);
+            float newXScale = (float)(ModelScalingFactor);
+            float newYScale = (float)(ModelScalingFactor);
+            float newZScale = (float)(ModelScalingFactor);
+
+            Environment.transform.localScale = new Vector3(newXScale, newYScale, newZScale);
             Environment.SetActive(false);
+
+            // Initialize the Canvas
+            UIController.RunModeEnabled();
         }
 
         /// <summary>

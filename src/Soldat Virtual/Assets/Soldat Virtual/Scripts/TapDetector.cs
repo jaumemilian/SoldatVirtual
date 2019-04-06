@@ -25,8 +25,6 @@ namespace SoldatVirtual.Scripts
 
         public GameObject Environment;
 
-        public SoldatVirtualUIController UIController;
-
         public SoldierMovement SoldierMovement;
 
         /// <summary>
@@ -96,60 +94,61 @@ namespace SoldatVirtual.Scripts
                     SoldierMovement.Destination = hit.Pose.position;
                     SoldierMovement.IsSoldierStopped = false;
                 }
-
             }
             else
             {
-                // Create a new Anchor
-                Anchor anchor = hit.Trackable.CreateAnchor(hit.Pose);
-                // Get the camera position
-                Vector3 cameraPosition = FirstPersonCamera.transform.position;
-                // The soldier should only rotate around the Y axis
-                cameraPosition.y = hit.Pose.position.y;
+                //PrintTheGameObjects(hit);
+                PrintTheEnvironment(hit);
 
-                PrintTheSoldier(hit, cameraPosition, anchor);
+                var components = GameObject.FindGameObjectsWithTag("Rescale");
 
-                PrintTheEnviornment(hit, cameraPosition, anchor);
+                MessageManager.ShowAndroidToastMessage("Components: " + components.Length);
 
-                // Initialize the Canvas
-                UIController.RunModeEnabled();
+                foreach (var comp in components)
+                {
+                    MessageManager.ShowAndroidToastMessage("Name: " + comp.name);
+                    MessageManager.ShowAndroidToastMessage("Position: " + comp.transform.localPosition);
+                }
 
+                // Initialize the Soldier destination
+                SoldierMovement.Destination = hit.Pose.position;
+
+                MessageManager.ShowAndroidToastMessage("Components: " + components.Length);
+
+                foreach (var comp in components)
+                {
+                    MessageManager.ShowAndroidToastMessage("Name: " + comp.name);
+                    MessageManager.ShowAndroidToastMessage("Position: " + comp.transform.localPosition);
+                }
             }
         }
 
-        private void PrintTheSoldier(TrackableHit hit, Vector3 cameraPosition, Anchor anchor)
+        private void PrintTheEnvironment(TrackableHit hit)
         {
-            // Enable the soldier
-            Soldier.SetActive(true);
-
-            // Set the position of the soldier
-            Soldier.transform.position = hit.Pose.position;
-            Soldier.transform.rotation = hit.Pose.rotation;
-
-            // Rotate the soldier to face the camera
-            Soldier.transform.LookAt(cameraPosition, Soldier.transform.up);
-
-            // Need to attach our Soldier to the anchor
-            Soldier.transform.parent = anchor.transform;
-
-            // Initialize the Soldier destination
-            SoldierMovement.Destination = Soldier.transform.position;
-        }
-
-        private void PrintTheEnviornment(TrackableHit hit, Vector3 cameraPosition, Anchor anchor)
-        {
-            // Do the same with the environment
             Environment.SetActive(true);
 
-            // Set the position of the environment
+            // Create a new Anchor
+            Anchor anchor = hit.Trackable.CreateAnchor(hit.Pose);
+            // Get the camera position
+            Vector3 cameraPosition = FirstPersonCamera.transform.position;
+
+            MessageManager.ShowAndroidToastMessage("Camera Position: " + cameraPosition.ToString());
+
+            // The soldier should only rotate around the Y axis
+            cameraPosition.y = hit.Pose.position.y;
+
+            // Set the gameobject position
             Environment.transform.position = hit.Pose.position;
             Environment.transform.rotation = hit.Pose.rotation;
 
-            // Rotate the environment to face the camera
+            // Rotate the gameobject to face the camera
             Environment.transform.LookAt(cameraPosition, Environment.transform.up);
 
-            // Need to attach our environment to the anchor
-            Environment.transform.parent = anchor.transform;
+            // Need to attach our gameobject to the anchor
+            // Environment.transform.parent = anchor.transform;
+
         }
+
+
     }
 }
