@@ -20,7 +20,7 @@ namespace SoldatVirtual.Scripts
 
         public static bool IsSoldierStopped;
 
-        private readonly int speedParameter = Animator.StringToHash("Speed");
+        private readonly int isRunningParameter = Animator.StringToHash("IsRunning");
 
         private readonly int isInShotModeParameter = Animator.StringToHash("IsInShotMode");
 
@@ -34,8 +34,6 @@ namespace SoldatVirtual.Scripts
             if (!Soldier.activeInHierarchy) // If soldier is not active, return
                 return;
 
-            float speedValue = 0f;
-
             if (Vector3.Distance(Soldier.transform.position, Destination) <= 0.01)
             {
                 if (!IsSoldierStopped)
@@ -44,21 +42,21 @@ namespace SoldatVirtual.Scripts
                     Soldier.transform.position = Destination;
 
                     // Set the speed (which is what the animator will use) to zero.
-                    speedValue = 0f;
                     IsSoldierStopped = true;
                 }
+
+                SoldierAnimator.SetBool(isRunningParameter, false);
             }
             else
             {
-                speedValue = 1f;
-
                 // Rotate the soldier to face the destination
                 Soldier.transform.LookAt(Destination, Soldier.transform.up);
-                // Move the soldier
-                Soldier.transform.position = Vector3.MoveTowards(Soldier.transform.position, Destination, 0.005f);
-            }
 
-            SoldierAnimator.SetFloat(speedParameter, speedValue);
+                // Move the soldier
+                Soldier.transform.position = Vector3.MoveTowards(Soldier.transform.position, Destination, 0.2f * Time.deltaTime);
+
+                SoldierAnimator.SetBool(isRunningParameter, true);
+            }
         }
 
         public void SetShotMode()
