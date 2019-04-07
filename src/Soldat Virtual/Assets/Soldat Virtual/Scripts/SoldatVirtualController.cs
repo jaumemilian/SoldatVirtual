@@ -26,8 +26,10 @@ namespace SoldatVirtual.Scripts
 
         public Text EnvironmentText;
         public Text SoldierText;
-
         public Text EnemyText;
+        public Text ScoreText;
+
+        public static int TotalEnemiesAlive = 3;
 
         public float ModelScalingFactor = 0.005f;
 
@@ -63,6 +65,8 @@ namespace SoldatVirtual.Scripts
 
             EnemyText.text = "Enemy Position: " + Enemy.transform.position.ToString();
             EnemyText.text += ". Rotation: " + Enemy.transform.rotation.ToString();
+
+            ScoreText.text = "Enemies Alive: " + TotalEnemiesAlive;
 
             _UpdateApplicationLifecycle();
         }

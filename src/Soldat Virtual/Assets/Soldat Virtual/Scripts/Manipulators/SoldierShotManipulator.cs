@@ -50,13 +50,6 @@ namespace SoldatVirtual.Scripts
                 return;
             }
 
-            MessageManager.ShowAndroidToastMessage("JMMMM SoldierShotManipulator --> Shot to: " + gesture.TargetObject.name);
-
-            if (gesture.TargetObject.name == "Enemy")
-            {
-                MessageManager.ShowAndroidToastMessage("JMMMM SoldierShotManipulator --> Shot --> Diana !!!");
-            }
-
             // Raycast against the location the player touched to search for planes.
             TrackableHit hit;
             TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinInfinity;
@@ -72,14 +65,14 @@ namespace SoldatVirtual.Scripts
                 }
                 else
                 {
-                    _OnTapHandler(hit);
+                    _OnTapHandler(hit, gesture.TargetObject);
                 }
             }
         }
 
-        private void _OnTapHandler(TrackableHit hit)
+        private void _OnTapHandler(TrackableHit hit, GameObject targetObject)
         {
-            SoldierMovement.Shot(hit.Pose.position);
+            SoldierMovement.Shot(hit.Pose.position, targetObject);
         }
     }
 }

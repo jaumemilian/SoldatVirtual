@@ -34,7 +34,7 @@ namespace SoldatVirtual.Scripts
             if (!Soldier.activeInHierarchy) // If soldier is not active, return
                 return;
 
-            if (Vector3.Distance(Soldier.transform.position, Destination) <= 0.01)
+            if (Vector3.Distance(Soldier.transform.position, Destination) <= 0.03)
             {
                 if (!IsSoldierStopped)
                 {
@@ -69,11 +69,27 @@ namespace SoldatVirtual.Scripts
             SoldierAnimator.SetBool(isInShotModeParameter, false);
         }
 
-        public void Shot(Vector3 shotDestination)
+        public void Shot(Vector3 shotDestination, GameObject targetObject)
         {
             // Rotate the soldier where it has been hit
             Soldier.transform.LookAt(shotDestination, Soldier.transform.up);
             SoldierAnimator.SetTrigger("Shot");
+
+            if (targetObject.tag == "Enemy")
+            {
+                MessageManager.ShowAndroidToastMessage("Enemy " + targetObject.name + " Killed !");
+
+                targetObject.transform.Rotate(new Vector3(90f, 0f, 0f));
+
+                SoldatVirtualController.TotalEnemiesAlive -= 1;
+
+                if (SoldatVirtualController.TotalEnemiesAlive == 0)
+                    MessageManager.ShowAndroidToastMessage("You WIN !!!!");
+            }
+            else
+            {
+                MessageManager.ShowAndroidToastMessage("Failed: " + targetObject.name);
+            }
         }
     }
 }

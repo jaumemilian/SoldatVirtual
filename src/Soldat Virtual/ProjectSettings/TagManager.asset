@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ManipulationSystem
   - Rescale
+  - Enemy
   layers:
   - Default
   - TransparentFX
