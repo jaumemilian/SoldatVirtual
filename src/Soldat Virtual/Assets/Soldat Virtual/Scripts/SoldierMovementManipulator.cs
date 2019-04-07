@@ -56,7 +56,7 @@ namespace SoldatVirtual.Scripts
             }
 
             // If gesture is not targeting an existing object we are done.
-            if (gesture.TargetObject == null)
+            if (gesture.TargetObject == null || gesture.TargetObject.name != "Ground")
             {
                 return;
             }

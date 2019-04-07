@@ -18,12 +18,16 @@ namespace SoldatVirtual.Scripts
 
         public GameObject Soldier;
 
+        public GameObject Enemy;
+
         public SoldatVirtualUIController UIController;
 
         public SoldierMovement SoldierMovement;
 
         public Text EnvironmentText;
         public Text SoldierText;
+
+        public Text EnemyText;
 
         public float ModelScalingFactor = 0.005f;
 
@@ -56,6 +60,9 @@ namespace SoldatVirtual.Scripts
             SoldierText.text = "Soldat Position: " + Soldier.transform.position.ToString();
             SoldierText.text += ". Rotation: " + Soldier.transform.rotation.ToString();
             SoldierText.text += ". Destination: " + SoldierMovement.Destination;
+
+            EnemyText.text = "Enemy Position: " + Enemy.transform.position.ToString();
+            EnemyText.text += ". Rotation: " + Enemy.transform.rotation.ToString();
 
             _UpdateApplicationLifecycle();
         }
