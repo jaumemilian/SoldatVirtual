@@ -43,15 +43,7 @@ namespace SoldatVirtual.Scripts
         /// <param name="gesture">The current gesture.</param>
         protected override void OnEndManipulation(TapGesture gesture)
         {
-            MessageManager.ShowAndroidToastMessage("JMMMM EnvironmentPlaceManipulator");
-
             if (gesture.WasCancelled)
-            {
-                return;
-            }
-
-            // If gesture is targeting an existing object we are done.
-            if (gesture.TargetObject != null)
             {
                 return;
             }

@@ -34,7 +34,10 @@ namespace SoldatVirtual.Scripts
         /// <returns>True if the manipulation can be started.</returns>
         protected override bool CanStartManipulationForGesture(TapGesture gesture)
         {
-            if (gesture.TargetObject != null && Environment.activeInHierarchy)
+            if (gesture.TargetObject != null &&
+                Environment.activeInHierarchy &&
+                gesture.TargetObject.name == "Ground" &&
+                !SoldatVirtualUIController.IsInShotMode)
             {
                 return true;
             }
@@ -48,15 +51,7 @@ namespace SoldatVirtual.Scripts
         /// <param name="gesture">The current gesture.</param>
         protected override void OnEndManipulation(TapGesture gesture)
         {
-            MessageManager.ShowAndroidToastMessage("JMMMM SoldierMovementManipulator");
-
             if (gesture.WasCancelled)
-            {
-                return;
-            }
-
-            // If gesture is not targeting an existing object we are done.
-            if (gesture.TargetObject == null || gesture.TargetObject.name != "Ground")
             {
                 return;
             }
@@ -83,18 +78,9 @@ namespace SoldatVirtual.Scripts
 
         private void _OnTapHandler(TrackableHit hit)
         {
-            Vector3 finalDestination = new Vector3(hit.Pose.position.x, hit.Pose.position.y, hit.Pose.position.z);
-
-            if (SoldatVirtualUIController.IsInShotMode)
-            {
-                SoldierMovement.Shot(hit.Pose.position);
-            }
-            else
-            {
-                // Set the destination of the Soldier
-                SoldierMovement.Destination = hit.Pose.position;
-                SoldierMovement.IsSoldierStopped = false;
-            }
+            // Set the destination of the Soldier
+            SoldierMovement.Destination = hit.Pose.position;
+            SoldierMovement.IsSoldierStopped = false;
         }
     }
 }
