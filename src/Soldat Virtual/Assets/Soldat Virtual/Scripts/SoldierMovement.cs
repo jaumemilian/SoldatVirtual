@@ -24,9 +24,11 @@ namespace SoldatVirtual.Scripts
 
         private readonly int isInShotModeParameter = Animator.StringToHash("IsInShotMode");
 
+        protected Joystick joystick;
+
         private void Start()
         {
-
+            joystick = FindObjectOfType<Joystick>();
         }
 
         private void Update()
@@ -34,6 +36,24 @@ namespace SoldatVirtual.Scripts
             if (!Soldier.activeInHierarchy) // If soldier is not active, return
                 return;
 
+            if (joystick.Horizontal != 0f || joystick.Vertical != 0f)
+            {
+                Soldier.transform.forward = new Vector3(joystick.Horizontal, 0f, joystick.Vertical);
+
+                var moveDirection = new Vector3(joystick.Horizontal * 0.002f, 0f, joystick.Vertical * 0.002f);
+                //moveDirection = transform.TransformDirection(moveDirection);
+
+                //moveDirection = Camera.main.transform.TransformDirection(moveDirection.x * -1f, 0f, moveDirection.y * -1f);
+
+                transform.Translate(moveDirection);
+                SoldierAnimator.SetBool(isRunningParameter, true);
+            }
+            else
+            {
+                SoldierAnimator.SetBool(isRunningParameter, false);
+            }
+
+            /* 
             if (Vector3.Distance(Soldier.transform.position, Destination) <= 0.03)
             {
                 if (!IsSoldierStopped)
@@ -57,6 +77,7 @@ namespace SoldatVirtual.Scripts
 
                 SoldierAnimator.SetBool(isRunningParameter, true);
             }
+            */
         }
 
         public void SetShotMode()

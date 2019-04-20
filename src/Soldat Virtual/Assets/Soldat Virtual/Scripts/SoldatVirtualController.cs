@@ -38,14 +38,20 @@ namespace SoldatVirtual.Scripts
         /// </summary>
         private bool m_IsQuitting = false;
 
+        protected Joystick joystick;
+
         public void Start()
         {
+            joystick = FindObjectOfType<Joystick>();
+
             float newXScale = (float)(ModelScalingFactor);
             float newYScale = (float)(ModelScalingFactor);
             float newZScale = (float)(ModelScalingFactor);
 
             Environment.transform.localScale = new Vector3(newXScale, newYScale, newZScale);
             Environment.SetActive(false);
+
+            Soldier.transform.position = new Vector3(Environment.transform.position.x, Environment.transform.position.y, Environment.transform.position.z);
 
             // Initialize the Canvas
             UIController.RunModeEnabled();
@@ -67,6 +73,9 @@ namespace SoldatVirtual.Scripts
             EnemyText.text += ". Rotation: " + Enemy.transform.rotation.ToString();
 
             ScoreText.text = "Enemies Alive: " + TotalEnemiesAlive;
+
+            EnvironmentText.text = "Joystick. Horizontal: " + joystick.Horizontal;
+            EnvironmentText.text += ". Vertical: " + joystick.Vertical;
 
             _UpdateApplicationLifecycle();
         }
